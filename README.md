@@ -8,8 +8,8 @@ Instead of using Tree Parzen with a categorical distribution, qEI uses a Gaussia
 
 
 ## Forked Repository
-Until my changes are merged with DSPy, I have a [fored repository](https://github.com/sign-of-fourier/dspy) that allows a sampler to be passed when initializing mipro_sampler_v2.
-Use that one instead. It is backwards compatible with DSPy and the same in every other way.
+Until my changes are merged with DSPy, I created a [forked repository](https://github.com/sign-of-fourier/dspy) that allows a sampler to be passed when initializing mipro_sampler_v2.
+Use this one instead. It is backwards compatible with DSPy and the same in every other way.
 ```
 from mpromptune import qEI
 import os
