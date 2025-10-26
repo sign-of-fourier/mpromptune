@@ -1,0 +1,7 @@
+asyncer
+litellm==1.78.5 
+json_repair
+aiohttp==3.13.1
+magicattr
+gepa
+optuna
