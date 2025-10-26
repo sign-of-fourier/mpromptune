@@ -6,6 +6,12 @@ Tree Parzen Estimator [does't really handle](https://proceedings.mlr.press/v108/
 ## Forked Repository
 Until my changes are merged with DSPy, I created a [forked repository](https://github.com/sign-of-fourier/dspy) that allows a sampler to be passed when initializing mipro_sampler_v2.
 It is backwards compatible with DSPy and the same in every other way.
+qEI.Sampler(max_space_size, n_batches, batch_size, min_cold_start)
+- **max_space_size**: when sampling, the maximum number of points to consider.
+- **n_batches**: when batching, the number of batches. *In this context, a batch is a group of suggestions.*
+- **batch_size**: number in each batch
+- **min_cold_start**: run with random selections until you get to this point
+This example from DSPy optimizes instruction, few shot combinations
 ```
 git git+https://github.com/sign-of-fourier/dspy.git      
 ```

@@ -13,7 +13,7 @@ from openai import OpenAI
 
 
 class Sampler(BaseSampler):
-    def __init__(self, max_space_size, n_batches, batch_size):
+    def __init__(self, max_space_size=100, n_batches=100, batch_size=4, min_cold_start=4):
         self.instruction_candidates = None
         self.demo_candidates = None
         self.max_space_size = max_space_size
