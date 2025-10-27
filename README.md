@@ -36,7 +36,7 @@ from dspy.datasets.gsm8k import GSM8K, gsm8k_metric
 from dspy.teleprompt import MIPROv2
 
 os.environ['OPEN_AI_KEY']='Your token here'
-os.environ['X_RapidAPI_Key']='Your token here'
+os.environ['X_RAPIDAPI_KEY']='Your token here'
 ```
 Using example data (Grade school math 8K). n_jobs controls parallelization at the prompt level.
 ```
