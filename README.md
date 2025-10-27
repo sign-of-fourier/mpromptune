@@ -5,21 +5,28 @@ Uses batch Expected Improvement to suggest multiple prompts to run in parallel. 
 Tree Parzen Estimator [does't really handle](https://proceedings.mlr.press/v108/ma20a/ma20a.pdf) covariance between categorical variables. Instead of using Tree Parzen Estimator with a categorical distribution, qEI uses a Gaussian Process fit on **embeddings** of the possible combinations. This applies Bayesian Optimization at the **semantic** level in parallel.
 ## Forked Repository
 Until my changes are merged with DSPy, I created a [forked repository](https://github.com/sign-of-fourier/dspy) that allows a sampler to be passed when initializing mipro_sampler_v2.
+
 It is backwards compatible with DSPy and the same in every other way.
-qEI.Sampler(max_space_size, n_batches, batch_size, min_cold_start)
+```
+git git+https://github.com/sign-of-fourier/dspy.git      
+```
+
+Install this sampler that uses batch Expected Improvment.
+```
+pip install m-promptune
+```
+
+qEI.Sampler(instruction_candidates, demo_candidates, max_space_size, n_batches, batch_size, min_cold_start)
+- **instruction candidates**: generated internally by the MIMPROv2 sampler.
+- **demonstration_candidates**: also generated internally.
 - **max_space_size**: when sampling, the maximum number of points to consider.
 - **n_batches**: when batching, the number of batches. *In this context, a batch is a group of suggestions.*
 - **batch_size**: number in each batch
 - **min_cold_start**: run with random selections until you get to this point
 
-This example from DSPy optimizes instruction, few shot combinations
-```
-git git+https://github.com/sign-of-fourier/dspy.git      
-```
-Install my user defined sampler
-```
-pip install m-promptune
-```
+
+This example from DSPy optimizes instruction, few shot combinations.
+
 You will need tokens from [Open AI](https://platform.openai.com/api-keys) and [RapidAPI](https://rapidapi.com/info-FLGers_gH/api/batch-bayesian-optimization).
 ```
 import os
@@ -39,7 +46,7 @@ sampler_config={'sampler': 'qei',
                 'min_cold_start': 4}
 
 ```
-Using example data (Grade school math 8K).
+Using example data (Grade school math 8K). n_jobs controls parallelization at the prompt level.
 ```
 gsm8k = GSM8K()
 optimized_program = teleprompter.compile(
@@ -59,3 +66,6 @@ teleprompter = MIPROv2(
     num_threads=2
 )
 ```
+
+Contact me for questions info@quantecarlo.com
+
