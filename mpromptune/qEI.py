@@ -11,11 +11,10 @@ from optuna.samplers import BaseSampler
 from openai import OpenAI
 
 
-class Sampler(BaseSampler):
-    def __init__(self, instruction_candidates, demo_candidates, 
-                 max_space_size=100, n_batches=100, batch_size=4, min_cold_start=4):
-        self.instruction_candidates = instruction_candidates
-        self.demo_candidates = demo_candidates
+class qEISampler(BaseSampler):
+    def __init__(self, max_space_size=100, n_batches=100, batch_size=4, min_cold_start=4):
+        self.instruction_candidates = None
+        self.demo_candidates = None
         self.max_space_size = max_space_size
         self.search_space = []
         self.embeddings = {}
@@ -27,7 +26,6 @@ class Sampler(BaseSampler):
         self.batch_size = batch_size
         self.distributions = None
         self.labels = []
-        self.create_search_space(instruction_candidates, demo_candidates)
 
     def create_search_space(self, instruction_candidates, demo_candidates):
 
@@ -175,7 +173,7 @@ class Sampler(BaseSampler):
             headers = {
                     "Content-Type": "application/json",
                     "Accept": "application/json",
-                    "X-RapidAPI-Key": os.environ['X_RapidAPI_Key']
+                    "X-RapidAPI-Key": os.environ['X_RAPIDAPI_KEY']
                     }
             response = requests.post(url, json.dumps(data), headers=headers)
             boaz = eval(response.content.decode('utf-8'))
