@@ -11,6 +11,7 @@ qEI.Sampler(max_space_size, n_batches, batch_size, min_cold_start)
 - **n_batches**: when batching, the number of batches. *In this context, a batch is a group of suggestions.*
 - **batch_size**: number in each batch
 - **min_cold_start**: run with random selections until you get to this point
+
 This example from DSPy optimizes instruction, few shot combinations
 ```
 git git+https://github.com/sign-of-fourier/dspy.git      

@@ -11,14 +11,13 @@ from optuna.samplers import BaseSampler
 from openai import OpenAI
 
 
-
 class Sampler(BaseSampler):
-    def __init__(self, max_space_size=100, n_batches=100, batch_size=4, min_cold_start=4):
-        self.instruction_candidates = None
-        self.demo_candidates = None
+    def __init__(self, instruction_candidates, demo_candidates, 
+                 max_space_size=100, n_batches=100, batch_size=4, min_cold_start=4):
+        self.instruction_candidates = instruction_candidates
+        self.demo_candidates = demo_candidates
         self.max_space_size = max_space_size
         self.search_space = []
-#        self.relative_search_space = {}
         self.embeddings = {}
         self.n_batches = n_batches
         self.min_cold_start = 4
@@ -28,6 +27,7 @@ class Sampler(BaseSampler):
         self.batch_size = batch_size
         self.distributions = None
         self.labels = []
+        self.create_search_space(instruction_candidates, demo_candidates)
 
     def create_search_space(self, instruction_candidates, demo_candidates):
 
