@@ -31,20 +31,12 @@ You will need tokens from [Open AI](https://platform.openai.com/api-keys) and [R
 ```
 import os
 import dspy
+from mpromptune import qEI
 from dspy.datasets.gsm8k import GSM8K, gsm8k_metric
 from dspy.teleprompt import MIPROv2
 
 os.environ['OPEN_AI_KEY']='Your token here'
 os.environ['X_RapidAPI_Key']='Your token here'
-```
-Configure the sampler to use qEI. The default is still the TPESampler.
-```
-sampler_config={'sampler': 'qei',
-                'max_space_size': 100,
-                'n_batches': 200,
-                'batch_size': 4,
-                'min_cold_start': 4}
-
 ```
 Using example data (Grade school math 8K). n_jobs controls parallelization at the prompt level.
 ```
@@ -53,7 +45,7 @@ optimized_program = teleprompter.compile(
     dspy.ChainOfThought("question -> answer"),
     trainset=gsm8k.train,
     n_jobs=2,
-    **sampler_config
+    sampler=qEI.qEISampler()
 )
 ```
 Specify the number of threads for parallelizing at the data evaluation level.
