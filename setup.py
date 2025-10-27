@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 
 setup(name='m-promptune',
-      version='0.2.3',
+      version='0.2.4',
       description='DSPy acceleration',
       long_description=long_description,
       long_description_content_type="text/markdown",

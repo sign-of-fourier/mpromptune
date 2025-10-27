@@ -18,28 +18,35 @@ git git+https://github.com/sign-of-fourier/dspy.git
 ```
 Install my user defined sampler
 ```
-git git+https://github.com/sign-of-fourier/mpromptune.git
+pip install m-promptune
 ```
-You will need tokens from Open AI and [RapidAPI](https://rapidapi.com/info-FLGers_gH/api/batch-bayesian-optimization).
+You will need tokens from [Open AI](https://platform.openai.com/api-keys) and [RapidAPI](https://rapidapi.com/info-FLGers_gH/api/batch-bayesian-optimization).
 ```
-from mpromptune import qEI
 import os
 import dspy
 from dspy.datasets.gsm8k import GSM8K, gsm8k_metric
 from dspy.teleprompt import MIPROv2
-import random
-import optuna
-import numpy as np
+
+os.environ['OPEN_AI_KEY']='Your token here'
+os.environ['X_RapidAPI_Key']='Your token here'
 ```
-Pass the sampler wheninitialized and specify the number of prompts to run in parallel.
+Configure the sampler to use qEI. The default is still the TPESampler.
+```
+sampler_config={'sampler': 'qei',
+                'max_space_size': 100,
+                'n_batches': 200,
+                'batch_size': 4,
+                'min_cold_start': 4}
+
+```
+Using example data (Grade school math 8K).
 ```
 gsm8k = GSM8K()
-sampler= qEI.Sampler(40, 400, 4)
 optimized_program = teleprompter.compile(
     dspy.ChainOfThought("question -> answer"),
     trainset=gsm8k.train,
-    sampler=sampler,
-    n_jobs=2
+    n_jobs=2,
+    **sampler_config
 )
 ```
 Specify the number of threads for parallelizing at the data evaluation level.
